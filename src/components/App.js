@@ -14,10 +14,14 @@ function App() {
     .then(data => setHosts(data))
   }, [])
 
+  const toggleActive = () => {
+
+  }
+
   return (
     <Segment id="app">
       <WestworldMap activeHosts={activeHosts} />
-      <Headquarters hosts={hosts}/>
+      <Headquarters toggleActive={toggleActive} hosts={hosts}/>
     </Segment>
   );
 }

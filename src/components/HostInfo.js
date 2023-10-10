@@ -10,11 +10,12 @@ import {
 } from "semantic-ui-react";
 import "../stylesheets/HostInfo.css";
 
-function HostInfo({ id, imageUrl, firstName, gender, }) {
+function HostInfo({ id, imageUrl, firstName, gender, active }) {
+  const [isActive, setIsActive] = useState(active)
+  
   // This state is just to show how the dropdown component works.
   // Options have to be formatted in this way (array of objects with keys of: key, text, value)
   // Value has to match the value in the object to render the right text.
-console.log(imageUrl)
   // IMPORTANT: But whether it should be stateful or not is entirely up to you. Change this component however you like.
   const [options] = useState([
     { key: "some_area", text: "Some Area", value: "some_area" },
@@ -30,7 +31,17 @@ console.log(imageUrl)
   }
 
   function handleRadioChange() {
-    console.log("The radio button fired");
+    fetch(`http://localhost:3001/hosts/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        active: !isActive
+      })
+    })
+    .then(resp => resp.json())
+    .then(setIsActive(!isActive))
   }
 
   return (
@@ -54,8 +65,8 @@ console.log(imageUrl)
               {/* Checked takes a boolean and determines what position the switch is in. Should it always be true? */}
               <Radio
                 onChange={handleRadioChange}
-                label={"Active"}
-                checked={true}
+                label={active ? "Active" : 'Decommisioned'}
+                checked={isActive}
                 slider
               />
             </Card.Meta>

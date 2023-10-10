@@ -5,7 +5,7 @@ import "../stylesheets/Headquarters.css";
 import LogPanel from './LogPanel'
 import ColdStorage from './ColdStorage'
 
-function Headquarters({ hosts }) {
+function Headquarters({ hosts, toggleActive }) {
   const [hostSelected, setHostSelected] = useState(false)
   const [currentHost, setCurrentHost] = useState(null)
 
@@ -21,7 +21,7 @@ function Headquarters({ hosts }) {
         <ColdStorage hosts={hosts} onClick={displayHost}/>  
       </Grid.Column>
       <Grid.Column width={5}>
-        <Details currentHost={currentHost} hostSelected={hostSelected}/>
+        <Details toggleActive={toggleActive} currentHost={currentHost} hostSelected={hostSelected}/>
       </Grid.Column>
       <Grid.Column width={3}>
         <LogPanel />
