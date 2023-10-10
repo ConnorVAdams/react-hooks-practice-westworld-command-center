@@ -10,11 +10,11 @@ import {
 } from "semantic-ui-react";
 import "../stylesheets/HostInfo.css";
 
-function HostInfo({ id, firstName, active, imageUrl, gender, area }) {
+function HostInfo({ id, imageUrl, firstName, gender, }) {
   // This state is just to show how the dropdown component works.
   // Options have to be formatted in this way (array of objects with keys of: key, text, value)
   // Value has to match the value in the object to render the right text.
-
+console.log(imageUrl)
   // IMPORTANT: But whether it should be stateful or not is entirely up to you. Change this component however you like.
   const [options] = useState([
     { key: "some_area", text: "Some Area", value: "some_area" },

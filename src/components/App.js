@@ -6,6 +6,7 @@ import WestworldMap from './WestworldMap'
 
 function App() {
   const [hosts, setHosts] = useState([])
+  const [activeHosts, setActiveHosts] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:3001/hosts')
@@ -15,7 +16,7 @@ function App() {
 
   return (
     <Segment id="app">
-      <WestworldMap />
+      <WestworldMap activeHosts={activeHosts} />
       <Headquarters hosts={hosts}/>
     </Segment>
   );

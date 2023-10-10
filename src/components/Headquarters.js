@@ -6,14 +6,14 @@ import LogPanel from './LogPanel'
 import ColdStorage from './ColdStorage'
 
 function Headquarters({ hosts }) {
-  const [currentHost, setCurrentHost] = useState(null)
   const [hostSelected, setHostSelected] = useState(false)
+  const [currentHost, setCurrentHost] = useState(null)
 
   const displayHost = (hostObj) => {
-    setHostSelected(true)
     setCurrentHost(hostObj)
+    setHostSelected(true)
   }
-
+  
 
   return (
     <Grid celled="internally">
