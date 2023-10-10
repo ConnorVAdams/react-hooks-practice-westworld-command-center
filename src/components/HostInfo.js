@@ -10,8 +10,8 @@ import {
 } from "semantic-ui-react";
 import "../stylesheets/HostInfo.css";
 
-function HostInfo({ id, imageUrl, firstName, gender, active }) {
-  const [isActive, setIsActive] = useState(active)
+function HostInfo({ host, toggleActive }) {
+  const [isActive, setIsActive] = useState(host.active)
   
   // This state is just to show how the dropdown component works.
   // Options have to be formatted in this way (array of objects with keys of: key, text, value)
@@ -31,7 +31,7 @@ function HostInfo({ id, imageUrl, firstName, gender, active }) {
   }
 
   function handleRadioChange() {
-    fetch(`http://localhost:3001/hosts/${id}`, {
+    fetch(`http://localhost:3001/hosts/${host.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -41,6 +41,7 @@ function HostInfo({ id, imageUrl, firstName, gender, active }) {
       })
     })
     .then(resp => resp.json())
+    .then(toggleActive(host))
     .then(setIsActive(!isActive))
   }
 
@@ -48,7 +49,7 @@ function HostInfo({ id, imageUrl, firstName, gender, active }) {
     <Grid>
       <Grid.Column width={6}>
         <Image
-          src={imageUrl}
+          src={host.imageUrl}
           floated="left"
           size="small"
           className="hostImg"
@@ -58,14 +59,12 @@ function HostInfo({ id, imageUrl, firstName, gender, active }) {
         <Card>
           <Card.Content>
             <Card.Header>
-              {firstName} | {gender === 'Male' ? <Icon name="man" /> : <Icon name="woman" />}
+              {host.firstName} | {host.gender === 'Male' ? <Icon name="man" /> : <Icon name="woman" />}
             </Card.Header>
             <Card.Meta>
-              {/* Sometimes the label should take "Decommissioned". How are we going to conditionally render that? */}
-              {/* Checked takes a boolean and determines what position the switch is in. Should it always be true? */}
               <Radio
                 onChange={handleRadioChange}
-                label={active ? "Active" : 'Decommisioned'}
+                label={isActive ? "Active" : 'Decommisioned'}
                 checked={isActive}
                 slider
               />

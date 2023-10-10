@@ -14,13 +14,20 @@ function App() {
     .then(data => setHosts(data))
   }, [])
 
+  useEffect(() => {
+    const newActiveHosts = hosts.filter(host => host.active)
+    setActiveHosts(newActiveHosts)
+  }, [hosts])
+  
   const toggleActive = () => {
-
+    setHosts(hosts => hosts)
   }
+
+  console.log('rendered')
 
   return (
     <Segment id="app">
-      <WestworldMap activeHosts={activeHosts} />
+      <WestworldMap activeHosts={activeHosts}/>
       <Headquarters toggleActive={toggleActive} hosts={hosts}/>
     </Segment>
   );

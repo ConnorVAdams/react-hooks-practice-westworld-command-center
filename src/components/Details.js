@@ -9,7 +9,7 @@ function Details({ currentHost, hostSelected, toggleActive }) {
   
   return (
     <Segment id="details" className="HQComps">
-      {!hostSelected ? <Image size="medium" src={Images.westworldLogo} /> : <HostInfo {...currentHost} toggleActive={toggleActive}/>}
+      {!hostSelected ? <Image size="medium" src={Images.westworldLogo} /> : <HostInfo host={currentHost} toggleActive={toggleActive}/>}
     </Segment>
   );
 }
